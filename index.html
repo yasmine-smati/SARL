@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nettoyage et Désinfection</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f9;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #007BFF, #00C6FF);
             color: #333;
             margin: 0;
             padding: 0;
@@ -19,43 +22,58 @@
         }
         .container {
             background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             width: 90%;
             max-width: 600px;
             text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .header img {
-            width: 80px;
+            width: 100px;
             margin-bottom: 10px;
         }
         .header h2 {
             color: #007BFF;
             margin: 0;
+            font-size: 22px;
+            font-weight: 600;
         }
         label {
             font-weight: bold;
             display: block;
             margin: 10px 0 5px;
+            text-align: left;
         }
         input, textarea {
             width: 100%;
             padding: 10px;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 14px;
+            transition: all 0.3s ease-in-out;
+        }
+        input:focus, textarea:focus {
+            border-color: #007BFF;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
         }
         button {
             background-color: #007BFF;
             color: white;
-            padding: 10px;
+            padding: 12px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
             width: 100%;
+            transition: background 0.3s;
         }
         button:hover {
             background-color: #0056b3;
@@ -72,7 +90,7 @@
         </div>
         
         <p>Date: <span id="date"></span></p>
-        <form>
+        <form id="cleaningForm">
             <label for="equipement">Nom de l'équipement:</label>
             <textarea id="equipement" required></textarea>
             
@@ -110,6 +128,32 @@
     <script>
         document.getElementById("date").textContent = new Date().toLocaleDateString();
         document.getElementById("creation_date").textContent = new Date().toLocaleDateString();
+        
+        document.getElementById("cleaningForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            let formData = {
+                equipement: document.getElementById("equipement").value,
+                debut_nettoyage: document.getElementById("debut_nettoyage").value,
+                fin_nettoyage: document.getElementById("fin_nettoyage").value,
+                debut_desinfection: document.getElementById("debut_desinfection").value,
+                fin_desinfection: document.getElementById("fin_desinfection").value,
+                nettoye_par: document.getElementById("nettoye_par").value,
+                desinfecte_par: document.getElementById("desinfecte_par").value,
+                numero_instruction: document.getElementById("numero_instruction").value,
+                validation_microbio: document.getElementById("validation_microbio").value,
+                remarques: document.getElementById("remarques").value
+            };
+            
+            fetch("https://script.google.com/macros/s/AKfycbzWkZekoV0RkbHOJ6d8k-qAYZxmP_4YUIzPhje-J8FTo2FmZkuSySK2kBSOhpl4gF6n/exec", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.text())
+            .then(data => alert("Formulaire soumis avec succès !"))
+            .catch(error => alert("Erreur lors de l'envoi"));
+        });
     </script>
 </body>
 </html>
