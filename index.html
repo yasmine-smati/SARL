@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nettoyage et Désinfection</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+        .header img {
+            width: 80px;
+            margin-bottom: 10px;
+        }
+        .header h2 {
+            color: #007BFF;
+            margin: 0;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="logo.png" alt="Logo de l'entreprise"> <!-- Remplace par le vrai chemin du logo -->
+            <h2>Nettoyage et Désinfection</h2>
+            <p>ID Formulaire: <span id="form_id">12345</span></p>
+            <p>Date de Création: <span id="creation_date"></span></p>
+        </div>
+        
+        <p>Date: <span id="date"></span></p>
+        <form>
+            <label for="equipement">Nom de l'équipement:</label>
+            <textarea id="equipement" required></textarea>
+            
+            <label for="debut_nettoyage">Heure début nettoyage:</label>
+            <input type="time" id="debut_nettoyage" required>
+            
+            <label for="fin_nettoyage">Heure fin nettoyage:</label>
+            <input type="time" id="fin_nettoyage" required>
+            
+            <label for="debut_desinfection">Heure début désinfection:</label>
+            <input type="time" id="debut_desinfection" required>
+            
+            <label for="fin_desinfection">Heure fin désinfection:</label>
+            <input type="time" id="fin_desinfection" required>
+            
+            <label for="nettoye_par">Nettoyé par (Nom & Prénom):</label>
+            <input type="text" id="nettoye_par" required>
+            
+            <label for="desinfecte_par">Désinfecté par (Nom & Prénom):</label>
+            <input type="text" id="desinfecte_par" required>
+            
+            <label for="numero_instruction">Numéro d'instruction de travail:</label>
+            <input type="text" id="numero_instruction" required>
+            
+            <label for="validation_microbio">Validation microbiologique:</label>
+            <input type="text" id="validation_microbio" required>
+            
+            <label for="remarques">Remarques:</label>
+            <textarea id="remarques"></textarea>
+            
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById("date").textContent = new Date().toLocaleDateString();
+        document.getElementById("creation_date").textContent = new Date().toLocaleDateString();
+    </script>
+</body>
+</html>
